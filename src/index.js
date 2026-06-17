@@ -1,6 +1,7 @@
 import axios from "axios";
 import { formatoCartas } from "./utils/cardFormatter.js";
 import { urlServices } from "./services/scryfallServices.js";
+import { messageFormatter } from "./utils/messageFormatter.js";
 
 export function getCardInfo(nameCard) {
   if (nameCard == null || nameCard == undefined || nameCard.trim() === "") {
@@ -17,16 +18,19 @@ export function codeCardName() {
   return carticaCodificada;
 }
 
-async function infoCarticas() {
+export async function infoCarticas() {
   try {
     const url = urlServices();
     let response = await axios.get(url);
-    
+
     const cardData = response.data;
-  
+
     const card = formatoCartas(cardData);
-   
-    console.log(card);//permite visualizar response de cardFormatter
+    console.log(card);
+    
+    const cardMessage = messageFormatter(card);//da formato al mensaje en Wtps
+    console.log(cardMessage);
+
   } catch (error) {
     console.log("Error al encontrar la carta: ", error);
   }
