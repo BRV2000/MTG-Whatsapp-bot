@@ -2,27 +2,27 @@
 export function messageFormatter(cardFormatterMessage) {
     //fix: gestion del null o undefined
     const cardMessage = `
-    ${cardFormatterMessage.image}
+    ${cardFormatterMessage.image?? "No disponible"}
     🃏 Carta: ${cardFormatterMessage.name} 
-    💧 Coste: ${cardFormatterMessage.mana_cost}
+    💧 Coste: ${cardFormatterMessage.mana_cost?? "Sin coste"}
     📌 Tipo: ${cardFormatterMessage.type}
 
-    📖 Texto: ${cardFormatterMessage.text}
+    📖 Texto: ${cardFormatterMessage.text?? "Sin descripcion"}
 
     💰 Precio: 
-        ${cardFormatterMessage.prices?.usd}
-        ${cardFormatterMessage.prices?.usdfoil}
+       🌍regular:${cardFormatterMessage.prices?.usd?? "No disponible"}
+       ✨Foil: ${cardFormatterMessage.prices?.usdfoil?? "No disponible"}
 
     ⚖️ Legalidad: 
-        ${cardFormatterMessage.Legalidad?.commander}
-        ${cardFormatterMessage.Legalidad?.standar}
+        🎖️Commander:${cardFormatterMessage.Legalidad?.commander?? "No disponible"}
+        🧸Standar: ${cardFormatterMessage.Legalidad?.standar?? "No disponible"}
     
     🔗 Comprar:
-        ${cardFormatterMessage.urls.tcgplayer}
+        🃏tcgplayer:${cardFormatterMessage.urls.tcgplayer?? "No disponible"}
 
-        ${cardFormatterMessage.urls.cardmarket}
+        🛒cardmarket:${cardFormatterMessage.urls.cardmarket?? "No disponible"}
 
-        ${cardFormatterMessage.urls.cardhoarder}
+        📖cardhoarder:${cardFormatterMessage.urls.cardhoarder?? "No disponible"}
     `;
 
     return cardMessage;

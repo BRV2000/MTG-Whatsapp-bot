@@ -12,7 +12,7 @@ export function getCardInfo(nameCard) {
 }
 
 export function codeCardName() {
-  const cartica = getCardInfo("sol ring"); //fix: error al tener multiples opciones
+  const cartica = getCardInfo("bello,"); //fix: error al tener multiples opciones
 
   const carticaCodificada = encodeURIComponent(cartica);
   return carticaCodificada;
@@ -32,7 +32,7 @@ export async function infoCarticas() {
     console.log(cardMessage);
 
   } catch (error) {
-    console.log("Error al encontrar la carta: ", error);
+    console.log("Error al encontrar la carta: ", error);//muestra generalmente el error
   }
 }
 
