@@ -3,6 +3,8 @@ import { formatoCartas } from "./utils/cardFormatter.js";
 import { urlServices } from "./services/scryfallServices.js";
 import { messageFormatter } from "./utils/messageFormatter.js";
 
+let nombreCarta = "bello";
+
 export function getCardInfo(nameCard) {
   if (nameCard == null || nameCard == undefined || nameCard.trim() === "") {
     return "Card name is empty";
@@ -12,7 +14,7 @@ export function getCardInfo(nameCard) {
 }
 
 export function codeCardName() {
-  const cartica = getCardInfo("bello,"); //fix: error al tener multiples opciones
+  const cartica = getCardInfo(nombreCarta);// variable para el nombre de las cartas
 
   const carticaCodificada = encodeURIComponent(cartica);
   return carticaCodificada;
@@ -26,14 +28,20 @@ export async function infoCarticas() {
     const cardData = response.data;
 
     const card = formatoCartas(cardData);
-    console.log(card);
     
     const cardMessage = messageFormatter(card);//da formato al mensaje en Wtps
     console.log(cardMessage);
 
   } catch (error) {
-    console.log("Error al encontrar la carta: ", error);//muestra generalmente el error
+    //gestion de errores para cartas ambiguas o no encontradas
+    if (error.response.data.type == 'ambiguous') {
+      console.log("Muchas cartas coinciden con el nombre: " + nombreCarta + " agrega mas palabras, para una respuesta precisa");
+    } else {
+      console.log("Error al encontrar la carta, verifica su nombre.");
+    }
+
   }
 }
 
 infoCarticas();
+
